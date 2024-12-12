@@ -54,6 +54,8 @@ resource "google_compute_instance_group_manager" "portfolio_igm" {
 
   base_instance_name = "autoscaler-sample"
 
+  target_size = 1
+
   named_port {
     name = "http"
     port = 80

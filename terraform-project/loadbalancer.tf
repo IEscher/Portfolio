@@ -91,11 +91,13 @@ resource "google_compute_http_health_check" "http_health_check" {
 resource "google_compute_global_address" "ipv4_address" {
   name = "tf-loadbalancer-ipv4-address"
   ip_version = "IPV4"
+  address = "34.54.166.162"
 }
 
 resource "google_compute_global_address" "ipv6_address" {
   name = "tf-loadbalancer-ipv6-address"
   ip_version = "IPV6"
+  address = "2600:1901:0:f8cb::"
 }
 
 resource "google_compute_global_forwarding_rule" "https_forwarding_rule" {
