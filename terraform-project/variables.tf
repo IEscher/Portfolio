@@ -13,12 +13,6 @@ variable "gcp_service_account_key_file_path" {
   nullable    = false
 }
 
-variable "gce_instance_name" {
-  description = "Google Compute Engine (GCE) instance name"
-  type        = string
-  nullable    = false
-}
-
 variable "gce_instance_user" {
   description = "SSH user for the GCE instance"
   type        = string
@@ -33,6 +27,12 @@ variable "gce_ssh_pub_key_file_path" {
 
 variable "domain_name" {
   description = "Domain name for the portfolio"
+  type        = string
+  nullable    = false
+}
+
+variable "startup_script_file_path" {
+  description = "Path to the startup script file executed on every instance boot"
   type        = string
   nullable    = false
 }

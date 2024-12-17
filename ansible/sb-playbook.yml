@@ -1,0 +1,45 @@
+---
+- name: Configure Spring Boot Application
+  hosts: spring_boot
+  become: yes
+
+  tasks:
+    - name: Install Java
+      apt:
+        update_cache: yes
+        name: openjdk-17-jdk
+        state: present
+
+    - name: Create application directory
+      file:
+        path: /opt/spring-boot-app
+        state: directory
+
+    - name: Download Spring Boot application
+      get_url:
+        url: "https://example.com/path/to/application.jar"
+        dest: /opt/spring-boot-app/application.jar
+        mode: '0755'
+
+    - name: Create systemd service
+      copy:
+        dest: /etc/systemd/system/spring-boot.service
+        content: |
+          [Unit]
+          Description=Spring Boot Application
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/bin/java -jar /opt/spring-boot-app/application.jar
+          Restart=always
+          User=root
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+        name: spring-boot
+        enabled: yes
+        state: started

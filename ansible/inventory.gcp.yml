@@ -1,0 +1,27 @@
+plugin: google.cloud.gcp_compute
+zones:
+  - europe-west6-a
+projects:
+  - protfolio-444215
+filters:
+  - status = RUNNING
+service_account_file: ../credentials/protfolio-444215-service_account-key.json
+auth_kind: serviceaccount
+scopes:
+  - 'https://www.googleapis.com/auth/cloud-platform'
+  - 'https://www.googleapis.com/auth/compute.readonly'
+compose:
+  # Set an inventory parameter to use the Public IP address to connect to the host
+  # For Private ip use "networkInterfaces[0].networkIP"
+  ansible_host: networkInterfaces[0].accessConfigs[0].natIP
+hostnames:
+  # List host by name instead of the default public ip
+  - name
+groups:
+  spring_boot:
+    labels:
+      - http-server
+      - https-server
+# hostvars:
+#   ansible_user: ian_escher
+#   ansible_ssh_private_key_file: ../credentials/portfolio-ssh-key
