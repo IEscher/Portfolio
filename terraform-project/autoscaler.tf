@@ -41,6 +41,11 @@ resource "google_compute_instance_template" "portfolio_instance_template" {
   service_account {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
   }
+
+  metadata = {
+    ssh-keys = "${var.gce_instance_user}:${file(var.gce_ssh_pub_key_file_path)}"
+    startup-script = file(var.startup_script_file_path)
+  }
 }
 
 resource "google_compute_instance_group_manager" "portfolio_igm" {
