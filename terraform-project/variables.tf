@@ -36,3 +36,16 @@ variable "startup_script_file_path" {
   type        = string
   nullable    = false
 }
+
+variable "bucket_name" {
+  description = "The name of the GCS bucket"
+  type        = string
+  nullable    = false
+}
+
+variable "bucket_location" {
+  description = "The location of the GCS bucket"
+  type        = string
+  nullable    = false
+  default     = "EUROPE-WEST6"
+}

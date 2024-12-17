@@ -2,12 +2,18 @@
 - name: Configure Spring Boot Application
   hosts: spring_boot
   become: yes
+  remote_user: ian_escher
 
   tasks:
     - name: Install Java
       apt:
         update_cache: yes
-        name: openjdk-17-jdk
+        name: openjdk-21-jdk
+        state: present
+
+    - name: Install Google Cloud SDK
+      apt:
+        name: google-cloud-sdk
         state: present
 
     - name: Create application directory
@@ -15,11 +21,8 @@
         path: /opt/spring-boot-app
         state: directory
 
-    - name: Download Spring Boot application
-      get_url:
-        url: "https://example.com/path/to/application.jar"
-        dest: /opt/spring-boot-app/application.jar
-        mode: '0755'
+    - name: Download Spring Boot application from GCS
+      command: gsutil cp gs://tf-portfolio-bucket-iescher/application.jar /opt/spring-boot-app/application.jar
 
     - name: Create systemd service
       copy:

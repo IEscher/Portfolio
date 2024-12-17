@@ -13,3 +13,17 @@ terraform {
   }
 }
 
+resource "google_storage_bucket" "portfolio_bucket" {
+  name     = var.bucket_name
+  location = var.bucket_location
+  force_destroy = true
+
+  lifecycle_rule {
+    action {
+      type = "Delete"
+    }
+    condition {
+      age = 365
+    }
+  }
+}

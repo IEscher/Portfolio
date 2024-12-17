@@ -5,7 +5,7 @@ projects:
   - protfolio-444215
 filters:
   - status = RUNNING
-service_account_file: ../credentials/protfolio-444215-service_account-key.json
+service_account_file: ../credentials/protfolio-444215-service_account-key.json # This script must be executable from the root of the repository
 auth_kind: serviceaccount
 scopes:
   - 'https://www.googleapis.com/auth/cloud-platform'
@@ -22,6 +22,6 @@ groups:
     labels:
       - http-server
       - https-server
-# hostvars:
-#   ansible_user: ian_escher
-#   ansible_ssh_private_key_file: ../credentials/portfolio-ssh-key
+    vars:
+      ansible_user: ian_escher
+      ansible_ssh_private_key_file: ../credentials/portfolio-ssh-key # This script must be executable from the root of the repository

@@ -45,6 +45,7 @@ resource "google_compute_instance_template" "portfolio_instance_template" {
   metadata = {
     ssh-keys = "${var.gce_instance_user}:${file(var.gce_ssh_pub_key_file_path)}"
     startup-script = file(var.startup_script_file_path)
+    gcp-key = file(var.gcp_service_account_key_file_path)
   }
 }
 
