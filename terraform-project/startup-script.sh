@@ -8,6 +8,9 @@ echo "$GCP_KEY" > /opt/gcp-key.json
 # Install Ansible and prerequisites
 apt update && apt install -y ansible
 
+# Add the Google Cloud SDK public key
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+
 # Install Google Cloud SDK
 apt-get install -y apt-transport-https ca-certificates gnupg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list

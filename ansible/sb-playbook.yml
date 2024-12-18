@@ -1,6 +1,6 @@
 ---
 - name: Configure Spring Boot Application
-  hosts: spring_boot
+  hosts: localhost
   become: yes
   remote_user: ian_escher
 
@@ -11,10 +11,10 @@
         name: openjdk-21-jdk
         state: present
 
-    - name: Install Google Cloud SDK
-      apt:
-        name: google-cloud-sdk
-        state: present
+#    - name: Install Google Cloud SDK
+#      apt:
+#        name: google-cloud-sdk
+#        state: present
 
     - name: Create application directory
       file:
@@ -36,6 +36,9 @@
           ExecStart=/usr/bin/java -jar /opt/spring-boot-app/application.jar
           Restart=always
           User=root
+          StandardOutput=syslog
+          StandardError=syslog
+          SyslogIdentifier=spring-boot
 
           [Install]
           WantedBy=multi-user.target
