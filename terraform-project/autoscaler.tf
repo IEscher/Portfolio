@@ -14,7 +14,7 @@ resource "google_compute_autoscaler" "portfolio_autoscaler" {
 
     max_replicas    = 3
     min_replicas    = 1
-    cooldown_period = 60
+    cooldown_period = 300
   }
 }
 # [END compute_autoscale_schedule]

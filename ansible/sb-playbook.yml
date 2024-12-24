@@ -3,6 +3,7 @@
   hosts: localhost
   become: yes
   remote_user: ian_escher
+  connection: local
 
   tasks:
     - name: Install Java
